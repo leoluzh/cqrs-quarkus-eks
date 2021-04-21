@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ebank-balance-app
+  namespace: ebank-quarkus-cqrs
+spec:
+  selector:
+    matchLabels:
+      app: ebank-balance-app
+      namespace: ebank-quarkus-cqrs
+  template:
+    metadata:
+      labels:
+        app: ebank-balance-app
+        namespace: ebank-quarkus-cqrs
+    spec:
+      containers:
+        - name: ebank-balance-app
+          image: leoluzh/balance-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /balance-service/health/live
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /balance-service/health/ready
