@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ebank-transaction-app
+  namespace: ebank-quarkus-cqrs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ebank-transaction-app
+      namespace: ebank-quarkus-cqrs
+  template:
+    metadata:
+      labels:
+        app: ebank-transaction-app
+        namespace: ebank-quarkus-cqrs
+    spec:
+      containers:
+        - name: ebank-transaction-app
+          image: leoluzh/transaction-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /transaction-service/health/live
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /transaction-service/health/ready
