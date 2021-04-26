@@ -24,8 +24,8 @@ docker exec -it ebank-kafka \
   ./bin/kafka-topics.sh --create \
   --topic transactions \
   --zookeeper ebank-zookeeper:2181 \
-  --replication-factor 5 \
-  --partitions 5
+  --replication-factor 1 \
+  --partitions 1
 ```
 
 ## Testing the application
