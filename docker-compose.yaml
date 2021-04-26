@@ -4,15 +4,21 @@ services:
 
   postgres-service:
     container_name: ebank-postgres
+    image: postgres:13.2
     ports:
     - "5432:5432"
-    image: postgres:13.2
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
     volumes:
       - ./scripts/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  mongodb-service:
+    container_name: ebank-mongo
+    image: mongo
+    ports:
+      - "27017:27017"
 
   zookeeper:
     container_name: ebank-zookeeper
