@@ -25,7 +25,7 @@ public class TransactionOutgoingProducer {
                 transaction.id,
                 transaction.value,
                 transaction.description));
-        
+
         //create with correlation id
         return KafkaRecord.of(UUID.randomUUID().toString(),transaction);
     }

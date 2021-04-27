@@ -13,9 +13,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 
-@Path("/api/v1/transactions")
+@Path(TransactionResource.RESOURCE_PATH)
 public class TransactionResource {
-
+    public static final String RESOURCE_PATH = "/api/v1/transactions" ;
     private static final String TRANSACTIONS_CHANNEL = "transactions";
 
     private final Emitter<Transaction> emitter;
@@ -34,7 +34,7 @@ public class TransactionResource {
     public Response save(final Transaction transaction){
         transaction.persist();
         emitter.send(transaction);
-        return Response.created(URI.create(String.format("/api/v1/transactions/%s",transaction.id))).build();
+        return Response.created(URI.create(String.format("%s/%s",RESOURCE_PATH,transaction.id))).build();
     }
 
 }
