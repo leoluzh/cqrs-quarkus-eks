@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: ebank-transaction-app
-          image: leoluzh/transaction-service:latest
+          image: leoluzh/transaction-service-jvm:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
