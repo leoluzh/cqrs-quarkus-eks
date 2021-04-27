@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: ebank-balance-app
-          image: leoluzh/balance-service:latest
+          image: leoluzh/balance-service-jvm:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
