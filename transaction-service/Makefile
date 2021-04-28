@@ -39,16 +39,16 @@ push-docker-legacy-jar:
 	docker push $(HUB_USER)/transaction-service-legacy-jar:$(IMAGE_VERSION)
 
 build-docker-native:
-	./mvnw clean package -Pnative; \
-	docker build -f src/main/docker/Dockerfile.native -t $(HUB_USER)/transaction-service .
+	./mvnw clean package -Pnative -Dquarkus.native.container-build=true -Dquarkus.native.native-image-xmx=8192m; \
+	docker build -f src/main/docker/Dockerfile.native -t $(HUB_USER)/transaction-service-native .
 
 push-docker-native:
-	docker push $(HUB_USER)/transaction-service:$(IMAGE_VERSION)
+	docker push $(HUB_USER)/transaction-service-native:$(IMAGE_VERSION)
 
 build-docker-native-distroless:
-	./mvnw clean package -Pnative; \
-	docker build -f src/main/docker/Dockerfile.native-distroless -t $(HUB_USER)/transaction-service .
+	./mvnw clean package -Pnative -Dquarkus.native.container-build=true; \
+	docker build -f src/main/docker/Dockerfile.native-distroless -t $(HUB_USER)/transaction-service-native-distroless .
 
 push-docker-native-distroless:
-	docker push $(HUB_USER)/transaction-service:$(IMAGE_VERSION)
+	docker push $(HUB_USER)/transaction-service-native-distroless:$(IMAGE_VERSION)
 
